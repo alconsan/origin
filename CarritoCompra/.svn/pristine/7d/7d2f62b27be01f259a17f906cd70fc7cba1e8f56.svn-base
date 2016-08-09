@@ -1,0 +1,54 @@
+package my.company;
+
+
+import java.io.Serializable;
+import java.util.*;
+
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+
+
+@ManagedBean
+
+@ApplicationScoped
+
+public class Cart implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected List<Product> selectedProducts;
+	protected List<Product> shoppingCart = new ArrayList<Product>();
+		
+	
+    public Cart() {
+		super();
+	}
+
+	public List<Product> getSelectedProducts() {
+
+    	return selectedProducts;
+    }
+ 
+    public void setSelectedProducts( List<Product> selectedProducts) {
+        this.selectedProducts = selectedProducts;
+    }
+    
+    public void addItem(){
+    	Iterator<Product> itr = selectedProducts.iterator();
+        while(itr.hasNext()) {
+           Product pr = itr.next();
+           shoppingCart.add(pr);
+        }
+    }
+    
+    public List<Product> getShoppingCart(){
+		return(shoppingCart);
+	} 
+       
+    public String showCart(){
+       	return("shoppingCart");
+    }
+    
+}   

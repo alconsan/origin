@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+<title>eBook Shop</title>
+<link href="./css/styles.css" rel="stylesheet" type="text/css"/>
+</h:head>
+<h:body>
+<h1 class="title">Book Catalog</h1>
+  
+Select your books:<br/><br/>
+<h:form id="form">
+<p:dataTable id="checkboxDT"
+	 		 var="product"
+			 value="#{category.products}" 
+			 selection="#{cart.selectedProducts}"
+			 rowKey="#{product.id}"
+			 style="margin-bottom:0">
+	<p:column selectionMode="multiple" style="width:16px; text-align:center"/>
+	<p:column headerText="ID">
+	  <h:outputText value="#{product.id}"/>		
+    </p:column> 
+	<p:column headerText="Title">
+	  <h:outputText value="#{product.title}"/>
+	</p:column>
+	<p:column headerText="Author">
+	  <h:outputText value="#{product.author}"/>
+    </p:column>
+	<p:column headerText="Price (€)">
+	  <h:outputText value="#{product.price}"/>
+	</p:column>
+	<f:facet name="footer">
+		<p:commandButton process="checkboxDT" 
+						 update=":form:multiProductDetail" 
+						 value="Add" 
+						 oncomplete="PF('multiProductDialog').show()" />
+     </f:facet>
+</p:dataTable>
+
+    <p:dialog header="Selected Products" widgetVar="multiProductDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="200">
+        <p:outputPanel id="multiProductDetail" style="text-align:center;">
+            <ui:repeat value="#{cart.selectedProducts}" var="product">
+                <h:outputText value="#{product.id} - #{product.title}" style="display:block"/>
+            </ui:repeat>
+        </p:outputPanel>
+    </p:dialog>
+</h:form>
+</h:body></html>

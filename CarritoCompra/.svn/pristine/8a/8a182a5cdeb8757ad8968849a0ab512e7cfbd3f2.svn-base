@@ -1,0 +1,50 @@
+package my.company;
+
+public class Product {
+	
+	private String author, title,id;
+	private double price; 
+	  
+	  public String getAuthor() {
+	    return(author);
+	  }
+	  
+	  public void setAuthor(String author) {
+	    this.author = author;
+	  }
+	  
+	  public String getTitle() {
+	    return(title);
+	  }
+	  
+	  public void setTitle(String title) {
+	    this.title = title;
+	  }
+	  
+	  public double getPrice() {
+	    return(price);
+	  }
+	  
+	  public void setPrice(double price) {
+	    this.price = price;
+	  }
+	  
+	  public String getId() {
+		    return(id);
+		  }
+		  
+		  public void setId(String id) {
+		    this.id = id;
+		  }
+	  
+	  public Product(String author, String title,
+	                    double price,String id) {
+	    this.author = author;
+	    this.title = title;
+	    this.price = price;
+	    this.id=id;
+	  }
+	  
+	  public Product(){}
+
+}

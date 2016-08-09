@@ -1,0 +1,41 @@
+package my.company;
+
+import java.util.HashMap;
+
+
+public class ProductMap implements ProductService {
+	
+	private static HashMap<String, Product[]> products;
+
+    static {
+        products = new HashMap<String, Product[]>();
+        
+        products.put("General Fiction",new Product[] {new Product("Yann Martel","Life Of Pi",11.59),
+													  new Product("F. Scott Fitzgerald","The Great Gatsby",17.64),
+													  new Product("Paula Hawkins","The Girl on the Train",7.05),
+													  new Product("David Lagercrantz","The Girl in the Spider's Web",5.03)});
+        
+        products.put("History",new Product[] {new Product("Peter Frankopan", "The Silk Roads", 12.05),
+        									  new Product("Elie Wiesel", "Night",12.11 ),
+        									  new Product("Rupert Matthews", "Stalingrad", 3.62),
+        									  new Product("Ta-Nehisi Coates", "Between the World and Me", 26.45)});
+        
+        products.put("SciFi",new Product[] {new Product("George Orwell", "1984",12.69),
+			     							new Product("Ray Bradbury","Farenheit 451",9.91),
+			     							new Product("Michael Crichton","Sphere",8.81),
+			     							new Product("Neal Stephenson","Seveneves",14.85)});
+        		
+        products.put("Poetry",new Product[] {new Product("Homer","The odyssey",7.05),
+											 new Product("Dante","Inferno: The Divine Comedy",9.57),
+											 new Product("Maryam Mafi","Rumi\'s Little Book of Life",15.66),
+											 new Product("Alice Oswald","Dart",13.10)});
+    }
+	
+
+	@Override
+	public Product[] findProduct(String category){
+		Product[] product=products.get(category);
+		return(product);
+	}
+
+}

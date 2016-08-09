@@ -1,0 +1,14 @@
+package my.company;
+
+import javax.faces.bean.ManagedBean;
+
+@ManagedBean
+public class CategoryOptions {
+	
+	private String[] cat = { "General Fiction", "History", "SciFi","Crime", "Poetry"};
+	
+	public String[] getCategories(){
+		return(cat);
+	}
+
+}

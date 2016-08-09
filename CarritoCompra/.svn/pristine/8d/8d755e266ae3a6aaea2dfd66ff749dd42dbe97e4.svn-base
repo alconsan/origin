@@ -1,0 +1,34 @@
+package my.company;
+
+
+
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import org.springframework.stereotype.Component;
+
+@ManagedBean
+@Component
+
+public class Category {
+	
+	protected String category="All";
+	  protected List<Product> product;
+	  protected static ProductService productService = new ProductMap();
+	
+	public String getCategory(){
+		return (category);
+	}
+	
+	public void setCategory(String category){
+		this.category=category;
+	}
+	
+	public String showProducts(){
+		product=productService.findProduct(category);
+		return("products");
+	}
+	
+	public List<Product> getProducts(){
+		return(product);
+	}
+}

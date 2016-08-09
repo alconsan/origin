@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+<title>eBook Shop</title>
+<link href="./css/styles.css" rel="stylesheet" type="text/css"/>
+</h:head>
+<h:body>
+<h1 class="title"></h1>
+  
+<br/><br/>
+
+<p:button outcome="index2" value="Homepage" icon="ui-icon-arrowreturnthick-1-w"/>
+<br/><br/>
+<h:form id="form">
+<p:dataTable id="checkboxDT"
+	 		 var="product"
+			 value="#{cart2.shoppingCart}"
+			 tableStyle="width:auto"
+			 resizableColumns="true" 
+			 style="margin-bottom:0">
+	<p:column headerText="ID" sortBy="#{product.id}">>
+	  <h:outputText value="#{product.id}"/>		
+    </p:column> 
+    	<p:column headerText="Category">
+	  <h:outputText value="#{product.category}"/>
+	</p:column>
+	<p:column headerText="Title">
+	  <h:outputText value="#{product.title}"/>
+	</p:column>
+	<p:column headerText="Author">
+	  <h:outputText value="#{product.author}"/>
+    </p:column>
+	<p:column headerText="Price">
+	  <h:outputText value="#{product.price}">
+	  	<f:convertNumber type="currency" currencySymbol="€" locale="es_ES"/>
+	  </h:outputText>
+	</p:column>
+	<p:columnGroup type="footer">
+      <p:row>
+        <p:column colspan="4" style="text-align:right" footerText="Total:" />
+           <p:column footerText="#{cart2.total} €"/>
+      </p:row>
+    </p:columnGroup>
+	<p:column>
+	  <p:commandButton process="checkboxDT" 
+					   value="Delete"
+					   icon="ui-icon-trash"
+					   update="checkboxDT"
+					   actionListener="#{cart2.deleteItem(product)}"
+					   ajax="false"/>
+    </p:column>
+
+  </p:dataTable>
+</h:form>
+</h:body></html>

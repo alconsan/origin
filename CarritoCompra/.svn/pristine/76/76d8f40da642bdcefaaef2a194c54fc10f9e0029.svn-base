@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+<h:head>
+<title>eBook Shop</title>
+
+<style type="text/css">
+            .value {
+                font-weight: bold;
+            }
+            
+            .ui-datatable {
+                margin-bottom: 25px
+            }
+            
+            .ui-datatable, .ui-datatable-footer {
+                text-align:center;
+            }
+            
+            .ui-datalist ul {
+                padding: 0 0 0 10px;
+                margin: 5px 0;
+            }
+            
+            .ui-datatable, .ui-button-icon-only, .ui-button-text {
+                padding: 0;
+                line-height: 1.2;
+            }
+
+        </style>
+</h:head>
+<h:body>
+<h1 class="title">Book Catalog</h1>
+  
+Select your books:<br/><br/>
+
+<h:form id="form">
+<p:growl id="msgs" showDetail="true" />
+<p:panelGrid id="forautowidth" columns="1" styleClass="ui-noborder">
+<p:dataTable id="checkboxDT"
+			 var="product" 
+			 value="#{indexBean.products}" 
+			 widgetVar="productsTable" 
+			 filteredValue="#{indexBean.filteredProducts}"
+			 selection="#{cart2.selectedProducts}"
+			 rowKey="#{product.id}"
+			 style="margin-bottom:0"
+			 tableStyle="width:auto"  
+			 resizableColumns="true" 
+			 stickyHeader="true">
+ 	<p:column selectionMode="multiple" style="width:16px; text-align:center"/>
+    <p:column headerText="ID">
+	  <h:outputText value="#{product.id}"/>		
+    </p:column>   
+       
+  	<p:column filterBy="#{product.category}" headerText="Category" filterMatchMode="exact" >
+  	  <f:facet name="filter">
+  	     <p:selectOneMenu onchange="PF('productsTable').filter()" >
+           <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+           <f:selectItems value="#{categoryOptions.categories}" />
+		 </p:selectOneMenu>
+  	  </f:facet>
+	  <h:outputText value="#{product.category}"/>		
+    </p:column> 
+    
+	<p:column headerText="Title">
+	  <h:outputText value="#{product.title}"/>
+	</p:column>
+	<p:column headerText="Author">
+	  <h:outputText value="#{product.author}"/>
+    </p:column>
+	<p:column headerText="Price">
+	  <h:outputText value="#{product.price}">
+	  	<f:convertNumber type="currency" currencySymbol="€" locale="es_ES"/>
+	  </h:outputText>
+	  
+	</p:column>
+
+	<f:facet name="footer">
+	  <p:commandButton process="checkboxDT" 
+					   value="Add"
+					   icon="ui-icon-plus"
+					   actionListener="#{cart2.addItem}"
+					   ajax="false"/>
+	  <p:commandButton process="checkboxDT" 
+					   value="Show Cart"
+					   icon="ui-icon-cart"
+					   action="#{cart2.showCart}"
+					   ajax="false"/>	  
+    </f:facet>
+    </p:dataTable>
+  </p:panelGrid>
+</h:form>
+</h:body></html>
